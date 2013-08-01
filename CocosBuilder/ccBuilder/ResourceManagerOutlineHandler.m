@@ -286,6 +286,8 @@
     NSString* spriteFile = NULL;
     NSString* spriteSheetFile = NULL;
     NSString* ccbFile = NULL;
+    NSString* jsonFile = NULL;
+    NSString* atlasFile = NULL;
     NSString* audioFile = NULL;
     
     for (id item in items)
@@ -300,6 +302,14 @@
             else if (res.type == kCCBResTypeCCBFile)
             {
                 ccbFile = [ResourceManagerUtil relativePathFromAbsolutePath: res.filePath];
+            }
+            else if (res.type == kCCBResTypeJSON)
+            {
+                jsonFile = [ResourceManagerUtil relativePathFromAbsolutePath: res.filePath];
+            }
+            else if (res.type == kCCBResTypeAtlas)
+            {
+                atlasFile = [ResourceManagerUtil relativePathFromAbsolutePath: res.filePath];
             }
             else if (res.type == kCCBResTypeAudio)
             {
@@ -339,6 +349,28 @@
         NSData* clipData = [NSKeyedArchiver archivedDataWithRootObject:clipDict];
         [pasteboard declareTypes:[NSArray arrayWithObject:@"com.cocosbuilder.ccb"] owner:NULL];
         [pasteboard setData:clipData forType:@"com.cocosbuilder.ccb"];
+        
+        return YES;
+    }
+    else if (jsonFile)
+    {
+        NSMutableDictionary *clipDict = [NSMutableDictionary dictionary];
+        [clipDict setObject:jsonFile forKey:@"jsonFile"];
+        
+        NSData* clipData = [NSKeyedArchiver archivedDataWithRootObject:clipDict];
+        [pasteboard declareTypes:[NSArray arrayWithObject:@"com.cocosbuilder.json"] owner:NULL];
+        [pasteboard setData:clipData forType:@"com.cocosbuilder.json"];
+        
+        return YES;
+    }
+    else if (atlasFile)
+    {
+        NSMutableDictionary *clipDict = [NSMutableDictionary dictionary];
+        [clipDict setObject:jsonFile forKey:@"atlasFile"];
+        
+        NSData* clipData = [NSKeyedArchiver archivedDataWithRootObject:clipDict];
+        [pasteboard declareTypes:[NSArray arrayWithObject:@"com.cocosbuilder.atlas"] owner:NULL];
+        [pasteboard setData:clipData forType:@"com.cocosbuilder.atlas"];
         
         return YES;
     }

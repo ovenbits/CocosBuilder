@@ -24,6 +24,7 @@
 
 #import "PlugInManager.h"
 #import "PlugInExport.h"
+#import "CCSkeletonAnimation.h"
 
 #if !CCB_BUILDING_COMMANDLINE
 #import "PlugInNode.h"
@@ -190,7 +191,7 @@
         NSDictionary* propInfo = [plugInProps objectAtIndex:i];
         
         id defaultValue = [propInfo objectForKey:@"default"];
-         
+        
         if (defaultValue)
         {
             NSString* name = [propInfo objectForKey:@"name"];

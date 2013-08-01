@@ -38,6 +38,7 @@ enum
     kCCBResTypeBMFont,
     kCCBResTypeTTF,
     kCCBResTypeCCBFile,
+    kCCBResTypeAtlas,
     kCCBResTypeJS,
     kCCBResTypeJSON,
     kCCBResTypeAudio,
@@ -98,6 +99,8 @@ enum
     NSMutableArray* bmFonts;
     NSMutableArray* ttfFonts;
     NSMutableArray* ccbFiles;
+    NSMutableArray* jsonFiles;
+    NSMutableArray* atlasFiles;
     NSMutableArray* audioFiles;
 }
 
@@ -112,6 +115,8 @@ enum
 @property (nonatomic,readonly) NSMutableArray* bmFonts;
 @property (nonatomic,readonly) NSMutableArray* ttfFonts;
 @property (nonatomic,readonly) NSMutableArray* ccbFiles;
+@property (nonatomic,readonly) NSMutableArray* jsonFiles;
+@property (nonatomic,readonly) NSMutableArray* atlasFiles;
 @property (nonatomic,readonly) NSMutableArray* audioFiles;
 - (NSArray*) resourcesForType:(int)type;
 

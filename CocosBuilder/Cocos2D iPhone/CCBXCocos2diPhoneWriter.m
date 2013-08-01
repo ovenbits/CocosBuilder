@@ -65,6 +65,8 @@
     [propTypes addObject:@"BlockCCControl"];
     [propTypes addObject:@"FloatScale"];
     [propTypes addObject:@"FloatXY"];
+    [propTypes addObject:@"JSONFile"];
+    [propTypes addObject:@"AtlasFile"];
 }
 
 - (id) init
@@ -446,6 +448,10 @@
         [self writeInt:a withSign:NO];
         [self writeInt:b withSign:NO];
     }
+    else if ([type isEqualToString:@"JSONFile"]
+             || [type isEqualToString:@"AtlasFile"]) {
+        [self writeCachedString:prop isPath:YES];
+    }
 }
 
 - (void) cacheStringsForNode:(NSDictionary*) node
@@ -587,6 +593,10 @@
                  || [type isEqualToString:@"String"])
         {
             [self addToStringCache:value isPath:NO];
+        }
+        else if ([type isEqualToString:@"JSONFile"]
+                 || [type isEqualToString:@"AtlasFile"]) {
+            [self addToStringCache:value isPath:YES];
         }
     }
     

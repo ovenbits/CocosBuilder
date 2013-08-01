@@ -172,6 +172,8 @@
 @synthesize bmFonts;
 @synthesize ttfFonts;
 @synthesize ccbFiles;
+@synthesize jsonFiles;
+@synthesize atlasFiles;
 @synthesize audioFiles;
 
 - (id) init
@@ -186,6 +188,8 @@
     bmFonts = [[NSMutableArray alloc] init];
     ttfFonts = [[NSMutableArray alloc] init];
     ccbFiles = [[NSMutableArray alloc] init];
+    jsonFiles = [[NSMutableArray alloc] init];
+    atlasFiles = [[NSMutableArray alloc] init];
     audioFiles = [[NSMutableArray alloc] init];
     
     return self;
@@ -199,6 +203,8 @@
     if (type == kCCBResTypeTTF) return ttfFonts;
     if (type == kCCBResTypeAnimation) return animations;
     if (type == kCCBResTypeCCBFile) return ccbFiles;
+    if (type == kCCBResTypeJSON) return jsonFiles;
+    if (type == kCCBResTypeAtlas) return atlasFiles;
     if (type == kCCBResTypeAudio) return audioFiles;
     return NULL;
 }
@@ -260,6 +266,8 @@
     [bmFonts release];
     [ttfFonts release];
     [ccbFiles release];
+    [jsonFiles release];
+    [atlasFiles release];
     [audioFiles release];
     [dirPath release];
     [super dealloc];
@@ -393,6 +401,8 @@
 - (BOOL) isResolutionDependentFile: (NSString*) file
 {
     if ([[file pathExtension] isEqualToString:@"ccb"]) return NO;
+    if ([[file pathExtension] isEqualToString:@"json"]) return NO;
+    if ([[file pathExtension] isEqualToString:@"atlas"]) return NO;
     
     NSString* fileNoExt = [file stringByDeletingPathExtension];
     
@@ -468,6 +478,10 @@
     else if ([ext isEqualToString:@"json"])
     {
         return kCCBResTypeJSON;
+    }
+    else if ([ext isEqualToString:@"atlas"])
+    {
+        return kCCBResTypeAtlas;
     }
     else if ([ext isEqualToString:@"wav"]
              || [ext isEqualToString:@"mp3"]
@@ -643,6 +657,8 @@
         [dir.bmFonts removeAllObjects];
         [dir.ttfFonts removeAllObjects];
         [dir.ccbFiles removeAllObjects];
+        [dir.jsonFiles removeAllObjects];
+        [dir.atlasFiles removeAllObjects];
         [dir.audioFiles removeAllObjects];
         
         for (NSString* file in resources)
@@ -675,6 +691,18 @@
                 [dir.ccbFiles addObject:res];
                 
             }
+            if (res.type == kCCBResTypeJSON
+                || res.type == kCCBResTypeDirectory)
+            {
+                [dir.jsonFiles addObject:res];
+                
+            }
+            if (res.type == kCCBResTypeAtlas
+                || res.type == kCCBResTypeDirectory)
+            {
+                [dir.atlasFiles addObject:res];
+                
+            }
             if (res.type == kCCBResTypeAudio
                 || res.type == kCCBResTypeDirectory)
             {
@@ -690,6 +718,7 @@
                 || res.type == kCCBResTypeDirectory
                 || res.type == kCCBResTypeJS
                 || res.type == kCCBResTypeJSON
+                || res.type == kCCBResTypeAtlas
                 || res.type == kCCBResTypeAudio)
             {
                 [dir.any addObject:res];
@@ -702,6 +731,8 @@
         [dir.bmFonts sortUsingSelector:@selector(compare:)];
         [dir.ttfFonts sortUsingSelector:@selector(compare:)];
         [dir.ccbFiles sortUsingSelector:@selector(compare:)];
+        [dir.jsonFiles sortUsingSelector:@selector(compare:)];
+        [dir.atlasFiles sortUsingSelector:@selector(compare:)];
         [dir.audioFiles sortUsingSelector:@selector(compare:)];
     }
     

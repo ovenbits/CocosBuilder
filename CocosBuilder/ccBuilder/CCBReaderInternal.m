@@ -30,6 +30,7 @@
 #import "CCBWriterInternal.h"
 #import "TexturePropertySetter.h"
 #import "AnimationPropertySetter.h"
+#import "SkeletonPropertySetter.h"
 #import "CCBGlobals.h"
 #import "CocosBuilderAppDelegate.h"
 #import "ResourceManager.h"
@@ -303,6 +304,20 @@ NSDictionary* renamedProperties = NULL;
         if (!ccbFile) ccbFile = @"";
         [NodeGraphPropertySetter setNodeGraphForNode:node andProperty:name withFile:ccbFile parentSize:parentSize];
         [extraProps setObject:ccbFile forKey:name];
+    }
+    else if ([type isEqualToString:@"JSONFile"])
+    {
+        NSString *jsonFile = serializedValue;
+        if (!jsonFile || ![jsonFile isKindOfClass:[NSString class]]) jsonFile = @"";
+        [SkeletonPropertySetter setJSONFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:jsonFile];
+        [extraProps setObject:jsonFile forKey:name];
+    }
+    else if ([type isEqualToString:@"AtlasFile"])
+    {
+        NSString *atlasFile = serializedValue;
+        if (!atlasFile || ![atlasFile isKindOfClass:[NSString class]]) atlasFile = @"";
+        [SkeletonPropertySetter setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:atlasFile];
+        [extraProps setObject:atlasFile forKey:name];
     }
     else
     {

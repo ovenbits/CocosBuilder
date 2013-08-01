@@ -210,6 +210,9 @@
         id defaultSerialization = [propInfo objectForKey:@"defaultSerialization"];
         id serializedValue = NULL;
         
+        if ([name isEqualToString:@"debug"]) continue;
+        if ([name isEqualToString:@"skeletonAnimations"]) continue;
+        
         BOOL useFlashSkews = [node usesFlashSkew];
         if (useFlashSkews && [name isEqualToString:@"rotation"]) continue;
         if (!useFlashSkews && [name isEqualToString:@"rotationX"]) continue;
@@ -410,6 +413,18 @@
             NSString* spriteFile = [extraProps objectForKey:name];
             if (!spriteFile) spriteFile = @"";
             serializedValue = spriteFile;
+        }
+        else if ([type isEqualToString:@"JSONFile"])
+        {
+            NSString *jsonFile = [extraProps objectForKey:name];
+            if (!jsonFile) jsonFile = @"";
+            serializedValue = jsonFile;
+        }
+        else if ([type isEqualToString:@"AtlasFile"])
+        {
+            NSString *atlasFile = [extraProps objectForKey:name];
+            if (!atlasFile) atlasFile = @"";
+            serializedValue = atlasFile;
         }
         else
         {

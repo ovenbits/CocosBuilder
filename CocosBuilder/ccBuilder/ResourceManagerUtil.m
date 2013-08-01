@@ -72,6 +72,8 @@
             if (res.type == kCCBResTypeImage
                 || res.type == kCCBResTypeBMFont
                 || res.type == kCCBResTypeCCBFile
+                || res.type == kCCBResTypeJSON
+                || res.type == kCCBResTypeAtlas
                 || res.type == kCCBResTypeTTF
                 || res.type == kCCBResTypeAudio)
             {

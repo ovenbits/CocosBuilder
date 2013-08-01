@@ -97,6 +97,7 @@
 
 #import <ExceptionHandling/NSExceptionHandler.h>
 
+#import "spine-cocos2d-iphone.h"
 
 @implementation CocosBuilderAppDelegate
 
@@ -571,7 +572,7 @@ static BOOL hideAllToNextSeparator;
     lastInspectorValue.inspectorValueBelow = inspectorValue;
     lastInspectorValue = inspectorValue;
     inspectorValue.readOnly = readOnly;
-    inspectorValue.rootNode = (self.selectedNode == [CocosScene cocosScene].rootNode);
+    inspectorValue.rootNode = (self.selectedNode == [CocosScene cocosScene].rootNode || [self.selectedNode isKindOfClass:[CCSkeletonAnimation class]]);
     
     // Save a reference in case it needs to be updated
     if (prop)

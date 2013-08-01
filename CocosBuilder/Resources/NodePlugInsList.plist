@@ -6,6 +6,14 @@
 	<array>
 		<dict>
 			<key>groupName</key>
+			<string>Skeleton</string>
+			<key>plugIns</key>
+			<array>
+				<string>CCSkeletonAnimation</string>
+			</array>
+		</dict>
+		<dict>
+			<key>groupName</key>
 			<string>Node</string>
 			<key>plugIns</key>
 			<array>
