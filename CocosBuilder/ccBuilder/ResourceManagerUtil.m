@@ -74,6 +74,7 @@
                 || res.type == kCCBResTypeCCBFile
                 || res.type == kCCBResTypeJSON
                 || res.type == kCCBResTypeAtlas
+                || res.type == kCCBResTypeJS
                 || res.type == kCCBResTypeTTF
                 || res.type == kCCBResTypeAudio)
             {

@@ -131,6 +131,34 @@
 			<key>name</key>
 			<string>skeletonAnimations</string>
 		</dict>
+		<dict>
+			<key>animatable</key>
+			<true/>
+			<key>affectsProperties</key>
+			<array>
+				<string>animationFile</string>
+			</array>
+			<key>displayName</key>
+			<string>Animation file</string>
+			<key>type</key>
+			<string>AnimationFile</string>
+			<key>name</key>
+			<string>animationFile</string>
+		</dict>
+		<dict>
+			<key>animatable</key>
+			<true/>
+			<key>affectsProperties</key>
+			<array>
+				<string>controllerFile</string>
+			</array>
+			<key>displayName</key>
+			<string>Controller</string>
+			<key>type</key>
+			<string>ControllerFile</string>
+			<key>name</key>
+			<string>controllerFile</string>
+		</dict>
 	</array>
 </dict>
 </plist>

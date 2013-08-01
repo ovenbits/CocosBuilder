@@ -172,6 +172,7 @@
 @synthesize bmFonts;
 @synthesize ttfFonts;
 @synthesize ccbFiles;
+@synthesize jsFiles;
 @synthesize jsonFiles;
 @synthesize atlasFiles;
 @synthesize audioFiles;
@@ -188,6 +189,7 @@
     bmFonts = [[NSMutableArray alloc] init];
     ttfFonts = [[NSMutableArray alloc] init];
     ccbFiles = [[NSMutableArray alloc] init];
+    jsFiles = [[NSMutableArray alloc] init];
     jsonFiles = [[NSMutableArray alloc] init];
     atlasFiles = [[NSMutableArray alloc] init];
     audioFiles = [[NSMutableArray alloc] init];
@@ -204,6 +206,7 @@
     if (type == kCCBResTypeAnimation) return animations;
     if (type == kCCBResTypeCCBFile) return ccbFiles;
     if (type == kCCBResTypeJSON) return jsonFiles;
+    if (type == kCCBResTypeJS) return jsFiles;
     if (type == kCCBResTypeAtlas) return atlasFiles;
     if (type == kCCBResTypeAudio) return audioFiles;
     return NULL;
@@ -266,6 +269,7 @@
     [bmFonts release];
     [ttfFonts release];
     [ccbFiles release];
+    [jsFiles release];
     [jsonFiles release];
     [atlasFiles release];
     [audioFiles release];
@@ -403,6 +407,7 @@
     if ([[file pathExtension] isEqualToString:@"ccb"]) return NO;
     if ([[file pathExtension] isEqualToString:@"json"]) return NO;
     if ([[file pathExtension] isEqualToString:@"atlas"]) return NO;
+    if ([[file pathExtension] isEqualToString:@"js"]) return NO;
     
     NSString* fileNoExt = [file stringByDeletingPathExtension];
     
@@ -482,6 +487,10 @@
     else if ([ext isEqualToString:@"atlas"])
     {
         return kCCBResTypeAtlas;
+    }
+    else if ([ext isEqualToString:@"js"])
+    {
+        return kCCBResTypeJS;
     }
     else if ([ext isEqualToString:@"wav"]
              || [ext isEqualToString:@"mp3"]
@@ -657,6 +666,7 @@
         [dir.bmFonts removeAllObjects];
         [dir.ttfFonts removeAllObjects];
         [dir.ccbFiles removeAllObjects];
+        [dir.jsFiles removeAllObjects];
         [dir.jsonFiles removeAllObjects];
         [dir.atlasFiles removeAllObjects];
         [dir.audioFiles removeAllObjects];
@@ -689,6 +699,12 @@
                 || res.type == kCCBResTypeDirectory)
             {
                 [dir.ccbFiles addObject:res];
+                
+            }
+            if (res.type == kCCBResTypeJS
+                || res.type == kCCBResTypeDirectory)
+            {
+                [dir.jsFiles addObject:res];
                 
             }
             if (res.type == kCCBResTypeJSON
@@ -731,6 +747,7 @@
         [dir.bmFonts sortUsingSelector:@selector(compare:)];
         [dir.ttfFonts sortUsingSelector:@selector(compare:)];
         [dir.ccbFiles sortUsingSelector:@selector(compare:)];
+        [dir.jsFiles sortUsingSelector:@selector(compare:)];
         [dir.jsonFiles sortUsingSelector:@selector(compare:)];
         [dir.atlasFiles sortUsingSelector:@selector(compare:)];
         [dir.audioFiles sortUsingSelector:@selector(compare:)];

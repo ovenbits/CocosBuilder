@@ -319,6 +319,20 @@ NSDictionary* renamedProperties = NULL;
         [SkeletonPropertySetter setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:atlasFile];
         [extraProps setObject:atlasFile forKey:name];
     }
+    else if ([type isEqualToString:@"AnimationFile"])
+    {
+        NSString *animationFile = serializedValue;
+        if (!animationFile || ![animationFile isKindOfClass:[NSString class]]) animationFile = @"";
+        [SkeletonPropertySetter setAnimationFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:animationFile];
+        [extraProps setObject:animationFile forKey:name];
+    }
+    else if ([type isEqualToString:@"ControllerFile"])
+    {
+        NSString *controllerFile = serializedValue;
+        if (!controllerFile || ![controllerFile isKindOfClass:[NSString class]]) controllerFile = @"";
+        [SkeletonPropertySetter setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:controllerFile];
+        [extraProps setObject:controllerFile forKey:name];
+    }
     else
     {
         NSLog(@"WARNING Unrecognized property type: %@", type);

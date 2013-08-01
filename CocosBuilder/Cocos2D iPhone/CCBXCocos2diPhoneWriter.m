@@ -67,6 +67,8 @@
     [propTypes addObject:@"FloatXY"];
     [propTypes addObject:@"JSONFile"];
     [propTypes addObject:@"AtlasFile"];
+    [propTypes addObject:@"AnimationFile"];
+    [propTypes addObject:@"ControllerFile"];
 }
 
 - (id) init
@@ -449,7 +451,9 @@
         [self writeInt:b withSign:NO];
     }
     else if ([type isEqualToString:@"JSONFile"]
-             || [type isEqualToString:@"AtlasFile"]) {
+             || [type isEqualToString:@"AtlasFile"]
+             || [type isEqualToString:@"AnimationFile"]
+             || [type isEqualToString:@"ControllerFile"]) {
         [self writeCachedString:prop isPath:YES];
     }
 }
@@ -595,7 +599,9 @@
             [self addToStringCache:value isPath:NO];
         }
         else if ([type isEqualToString:@"JSONFile"]
-                 || [type isEqualToString:@"AtlasFile"]) {
+                 || [type isEqualToString:@"AtlasFile"]
+                 || [type isEqualToString:@"AnimationFile"]
+                 || [type isEqualToString:@"ControllerFile"]) {
             [self addToStringCache:value isPath:YES];
         }
     }

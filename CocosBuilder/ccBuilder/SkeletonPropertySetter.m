@@ -40,22 +40,26 @@
     
     NSString *jsonFileName = [[ResourceManager sharedManager] toAbsolutePath:jsonFile];
     NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasString];
-    
-    Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
-    [node setAtlas:atlas];    
-    
-	SkeletonJson* json = SkeletonJson_create(atlas);
-	json->scale = 1.0;
-	SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
-	SkeletonJson_dispose(json);
-    
-	[node initialize:skeletonData ownsSkeletonData:YES];
-    
-    [node initialize];
-    
-    node.timeScale = 1.0f;
-    node.debugBones = true;
-    
+
+    if (!node.skeleton) {
+        
+        Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
+        [node setAtlas:atlas];
+        
+        SkeletonJson* json = SkeletonJson_create(atlas);
+        json->scale = 1.0;
+        SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
+        SkeletonJson_dispose(json);
+        
+        [node initialize:skeletonData ownsSkeletonData:YES];
+        [node setSkin:[jsonFile stringByDeletingPathExtension]];
+        [node initialize];
+        [node setToSetupPose];    
+        
+        node.timeScale = 1.0f;
+        node.debugBones = true;
+    }
+
     node.atlasFile = atlasFileName;
     node.jsonFile = jsonFileName;
     
@@ -64,7 +68,7 @@
 
 + (void)setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)atlasFile
 {
-    NSString *jsonString = [NSString stringWithFormat:@"%@.atlas",[atlasFile stringByDeletingPathExtension]];
+    NSString *jsonString = [NSString stringWithFormat:@"%@.json",[atlasFile stringByDeletingPathExtension]];
     
     
     NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasFile];
@@ -81,9 +85,9 @@
         SkeletonJson_dispose(json);
         
         [node initialize:skeletonData ownsSkeletonData:YES];
-        
-        
+        [node setSkin:[atlasFile stringByDeletingPathExtension]];
         [node initialize];
+        [node setToSetupPose];
         
         node.timeScale = 1.0f;
         node.debugBones = true;
@@ -93,6 +97,16 @@
     node.jsonFile = jsonFileName;
     
     [node setValue:atlasFileName forKey:prop];
+}
+
++ (void)setAnimationFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)animationFile
+{
+    [node setValue:animationFile forKey:prop];
+}
+
++ (void)setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)controllerFile
+{
+    [node setValue:controllerFile forKey:prop];
 }
 
 + (void)setSkeleton:(CCSkeletonAnimation *)node debugBones:(BOOL)debugBones

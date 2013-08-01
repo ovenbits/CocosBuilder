@@ -99,6 +99,7 @@ enum
     NSMutableArray* bmFonts;
     NSMutableArray* ttfFonts;
     NSMutableArray* ccbFiles;
+    NSMutableArray* jsFiles;    
     NSMutableArray* jsonFiles;
     NSMutableArray* atlasFiles;
     NSMutableArray* audioFiles;
@@ -115,6 +116,7 @@ enum
 @property (nonatomic,readonly) NSMutableArray* bmFonts;
 @property (nonatomic,readonly) NSMutableArray* ttfFonts;
 @property (nonatomic,readonly) NSMutableArray* ccbFiles;
+@property (nonatomic,readonly) NSMutableArray* jsFiles;
 @property (nonatomic,readonly) NSMutableArray* jsonFiles;
 @property (nonatomic,readonly) NSMutableArray* atlasFiles;
 @property (nonatomic,readonly) NSMutableArray* audioFiles;
