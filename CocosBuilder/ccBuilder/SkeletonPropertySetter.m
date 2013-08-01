@@ -36,46 +36,40 @@
 
 + (void)setJSONFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)jsonFile
 {
-    NSString *atlasString = [NSString stringWithFormat:@"%@.atlas",[jsonFile stringByDeletingPathExtension]];
-    
     NSString *jsonFileName = [[ResourceManager sharedManager] toAbsolutePath:jsonFile];
-    NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasString];
-
-    if (!node.skeleton) {
-        
-        Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
-        [node setAtlas:atlas];
-        
-        SkeletonJson* json = SkeletonJson_create(atlas);
-        json->scale = 1.0;
-        SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
-        SkeletonJson_dispose(json);
-        
-        [node initialize:skeletonData ownsSkeletonData:YES];
-        [node setSkin:[jsonFile stringByDeletingPathExtension]];
-        [node initialize];
-        [node setToSetupPose];    
-        
-        node.timeScale = 1.0f;
-        node.debugBones = true;
-    }
-
-    node.atlasFile = atlasFileName;
+    bool newJSONFile = ([node.jsonFile isEqualToString:jsonFileName]) ? false : true;
     node.jsonFile = jsonFileName;
+    [node setValue:jsonFileName forKey:prop];    
     
-    [node setValue:jsonFileName forKey:prop];
+    if (!node.atlasFile) return;
+
+    NSString *atlasFileName = node.atlasFile;
+
+    if (!node.skeleton || newJSONFile)
+        [SkeletonPropertySetter createSkeletonForNode:node JSONFile:jsonFileName atlasFile:atlasFileName];
 }
 
 + (void)setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)atlasFile
 {
-    NSString *jsonString = [NSString stringWithFormat:@"%@.json",[atlasFile stringByDeletingPathExtension]];
-    
-    
     NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasFile];
-    NSString *jsonFileName = [[ResourceManager sharedManager] toAbsolutePath:jsonString];
+    bool newAtlasFile = ([node.atlasFile isEqualToString:atlasFileName]) ? false : true;
+    node.atlasFile = atlasFileName;
+    [node setValue:atlasFileName forKey:prop];
     
-    if (!node.skeleton) {
+    if (!node.jsonFile) return;
     
+    NSString *jsonFileName = node.jsonFile;
+    
+    if (!node.skeleton || newAtlasFile)
+        [SkeletonPropertySetter createSkeletonForNode:node JSONFile:jsonFileName atlasFile:atlasFileName];
+}
+
++ (void)createSkeletonForNode:(CCSkeletonAnimation*)node JSONFile:(NSString*)jsonFileName atlasFile:(NSString*)atlasFileName
+{
+    if (jsonFileName && atlasFileName) {
+        
+        NSString *skinName = [atlasFileName lastPathComponent];
+        
         Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
         [node setAtlas:atlas];
         
@@ -84,19 +78,15 @@
         SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
         SkeletonJson_dispose(json);
         
-        [node initialize:skeletonData ownsSkeletonData:YES];
-        [node setSkin:[atlasFile stringByDeletingPathExtension]];
-        [node initialize];
-        [node setToSetupPose];
-        
-        node.timeScale = 1.0f;
-        node.debugBones = true;
+        if (skeletonData) {
+            [node initialize:skeletonData ownsSkeletonData:YES];
+            [node setSkin:[skinName stringByDeletingPathExtension]];
+            [node initialize];
+            [node setToSetupPose];
+            
+            node.timeScale = 1.0f;
+        }
     }
-    
-    node.atlasFile = atlasFileName;
-    node.jsonFile = jsonFileName;
-    
-    [node setValue:atlasFileName forKey:prop];
 }
 
 + (void)setAnimationFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)animationFile
