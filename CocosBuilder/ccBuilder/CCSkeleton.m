@@ -132,7 +132,7 @@
 
 - (void) draw {
     
-    if (!_jsonFile || !_atlasFile)
+    if (!_skeleton)
         return;
     
 	CC_NODE_DRAW_SETUP();

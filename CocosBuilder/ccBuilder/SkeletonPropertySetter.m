@@ -51,6 +51,7 @@
 
 + (void)setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)atlasFile
 {
+    NSLog(@"ATLAS FILE: %@",atlasFile);
     NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasFile];
     bool newAtlasFile = ([node.atlasFile isEqualToString:atlasFileName]) ? false : true;
     node.atlasFile = atlasFileName;
@@ -66,25 +67,29 @@
 
 + (void)createSkeletonForNode:(CCSkeletonAnimation*)node JSONFile:(NSString*)jsonFileName atlasFile:(NSString*)atlasFileName
 {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     if (jsonFileName && atlasFileName) {
         
-        NSString *skinName = [atlasFileName lastPathComponent];
-        
-        Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
-        [node setAtlas:atlas];
-        
-        SkeletonJson* json = SkeletonJson_create(atlas);
-        json->scale = 1.0;
-        SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
-        SkeletonJson_dispose(json);
-        
-        if (skeletonData) {
-            [node initialize:skeletonData ownsSkeletonData:YES];
-            [node setSkin:[skinName stringByDeletingPathExtension]];
-            [node initialize];
-            [node setToSetupPose];
+        if ([fileManager fileExistsAtPath:jsonFileName] && [fileManager fileExistsAtPath:atlasFileName]) {
             
-            node.timeScale = 1.0f;
+            NSString *skinName = [atlasFileName lastPathComponent];
+            
+            Atlas *atlas = Atlas_readAtlasFile([atlasFileName UTF8String]);
+            [node setAtlas:atlas];
+            
+            SkeletonJson* json = SkeletonJson_create(atlas);
+            json->scale = 1.0;
+            SkeletonData* skeletonData = SkeletonJson_readSkeletonDataFile(json, [jsonFileName UTF8String]);
+            SkeletonJson_dispose(json);
+            
+            if (skeletonData) {
+                [node initialize:skeletonData ownsSkeletonData:YES];
+                [node setSkin:[skinName stringByDeletingPathExtension]];
+                [node initialize];
+                [node setToSetupPose];
+                
+                node.timeScale = 1.0f;
+            }
         }
     }
 }

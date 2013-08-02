@@ -5,7 +5,7 @@
 	<key>inheritsFrom</key>
 	<string>CCNode</string>
 	<key>canHaveChildren</key>
-	<false/>
+	<true/>
 	<key>canBeRootNode</key>
 	<true/>
 	<key>className</key>

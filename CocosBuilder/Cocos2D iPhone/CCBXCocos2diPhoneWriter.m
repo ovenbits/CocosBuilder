@@ -454,7 +454,7 @@
              || [type isEqualToString:@"AtlasFile"]
              || [type isEqualToString:@"AnimationFile"]
              || [type isEqualToString:@"ControllerFile"]) {
-        [self writeCachedString:prop isPath:YES];
+        [self writeCachedString:[prop lastPathComponent] isPath:YES];
     }
 }
 
@@ -602,7 +602,7 @@
                  || [type isEqualToString:@"AtlasFile"]
                  || [type isEqualToString:@"AnimationFile"]
                  || [type isEqualToString:@"ControllerFile"]) {
-            [self addToStringCache:value isPath:YES];
+            [self addToStringCache:[value lastPathComponent] isPath:YES];
         }
     }
     

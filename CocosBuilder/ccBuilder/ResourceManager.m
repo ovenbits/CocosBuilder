@@ -431,15 +431,16 @@
     
     if (isDirectory)
     {
+        return kCCBResTypeDirectory;
         // Hide resolution directories
-        if ([[self resIndependentDirs] containsObject:[file lastPathComponent]])
-        {
-            return kCCBResTypeNone;
-        }
-        else
-        {
-            return kCCBResTypeDirectory;
-        }
+//        if ([[self resIndependentDirs] containsObject:[file lastPathComponent]])
+//        {
+//            return kCCBResTypeNone;
+//        }
+//        else
+//        {
+//            return kCCBResTypeDirectory;
+//        }
     }
     //else if ([[file stringByDeletingPathExtension] hasSuffix:@"-hd"]
     //         || [[file stringByDeletingPathExtension] hasSuffix:@"@2x"])
