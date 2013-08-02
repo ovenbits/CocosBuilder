@@ -115,6 +115,8 @@
 		812B47D417A4C44A000DD9E8 /* InspectorDebugSkeleton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812B47D217A4C449000DD9E8 /* InspectorDebugSkeleton.xib */; };
 		812B47D817A4C893000DD9E8 /* InspectorSkeletonAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 812B47D617A4C88F000DD9E8 /* InspectorSkeletonAnimations.m */; };
 		812B47D917A4C893000DD9E8 /* InspectorSkeletonAnimations.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812B47D717A4C891000DD9E8 /* InspectorSkeletonAnimations.xib */; };
+		816B5D1A17ABFB0000E1A959 /* InspectorUserStringData.m in Sources */ = {isa = PBXBuildFile; fileRef = 816B5D1817ABFB0000E1A959 /* InspectorUserStringData.m */; };
+		816B5D1B17ABFB0000E1A959 /* InspectorUserStringData.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816B5D1917ABFB0000E1A959 /* InspectorUserStringData.xib */; };
 		81705F9317A461730090694C /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 81705F8017A461730090694C /* Animation.c */; };
 		81705F9417A461730090694C /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 81705F8117A461730090694C /* AnimationState.c */; };
 		81705F9517A461730090694C /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 81705F8217A461730090694C /* AnimationStateData.c */; };
@@ -1061,6 +1063,9 @@
 		812B47D517A4C88E000DD9E8 /* InspectorSkeletonAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorSkeletonAnimations.h; sourceTree = "<group>"; };
 		812B47D617A4C88F000DD9E8 /* InspectorSkeletonAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorSkeletonAnimations.m; sourceTree = "<group>"; };
 		812B47D717A4C891000DD9E8 /* InspectorSkeletonAnimations.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorSkeletonAnimations.xib; sourceTree = "<group>"; };
+		816B5D1717ABFB0000E1A959 /* InspectorUserStringData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorUserStringData.h; sourceTree = "<group>"; };
+		816B5D1817ABFB0000E1A959 /* InspectorUserStringData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorUserStringData.m; sourceTree = "<group>"; };
+		816B5D1917ABFB0000E1A959 /* InspectorUserStringData.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorUserStringData.xib; sourceTree = "<group>"; };
 		81705F6E17A461670090694C /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		81705F6F17A461670090694C /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AnimationState.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		81705F7017A461670090694C /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AnimationStateData.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -4025,6 +4030,9 @@
 				812B47D517A4C88E000DD9E8 /* InspectorSkeletonAnimations.h */,
 				812B47D617A4C88F000DD9E8 /* InspectorSkeletonAnimations.m */,
 				812B47D717A4C891000DD9E8 /* InspectorSkeletonAnimations.xib */,
+				816B5D1717ABFB0000E1A959 /* InspectorUserStringData.h */,
+				816B5D1817ABFB0000E1A959 /* InspectorUserStringData.m */,
+				816B5D1917ABFB0000E1A959 /* InspectorUserStringData.xib */,
 				E3B4221714E4BE6B004547D6 /* InspectorSpriteFrame.xib */,
 				E3DA6FF916CB2B8700B12FFB /* InspectorPopoverSpriteFrame.xib */,
 				E3B4221914E4BE87004547D6 /* InspectorSpriteFrame.h */,
@@ -4966,6 +4974,7 @@
 				812B47D917A4C893000DD9E8 /* InspectorSkeletonAnimations.xib in Resources */,
 				81D1B4F917A9F48A00E542DB /* InspectorAnimationFile.xib in Resources */,
 				81D1B4FE17A9F4AE00E542DB /* InspectorControllerFile.xib in Resources */,
+				816B5D1B17ABFB0000E1A959 /* InspectorUserStringData.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5506,6 +5515,7 @@
 				812B47D817A4C893000DD9E8 /* InspectorSkeletonAnimations.m in Sources */,
 				81D1B4F817A9F48A00E542DB /* InspectorAnimationFile.m in Sources */,
 				81D1B4FD17A9F4AE00E542DB /* InspectorControllerFile.m in Sources */,
+				816B5D1A17ABFB0000E1A959 /* InspectorUserStringData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

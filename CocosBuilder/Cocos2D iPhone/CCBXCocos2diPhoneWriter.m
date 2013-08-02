@@ -69,6 +69,7 @@
     [propTypes addObject:@"AtlasFile"];
     [propTypes addObject:@"AnimationFile"];
     [propTypes addObject:@"ControllerFile"];
+    [propTypes addObject:@"UserStringData"];
 }
 
 - (id) init
@@ -456,6 +457,10 @@
              || [type isEqualToString:@"ControllerFile"]) {
         [self writeCachedString:[prop lastPathComponent] isPath:YES];
     }
+    else if ([type isEqualToString:@"UserStringData"])
+    {
+        [self writeCachedString:prop isPath: NO];
+    }
 }
 
 - (void) cacheStringsForNode:(NSDictionary*) node
@@ -603,6 +608,10 @@
                  || [type isEqualToString:@"AnimationFile"]
                  || [type isEqualToString:@"ControllerFile"]) {
             [self addToStringCache:[value lastPathComponent] isPath:YES];
+        }
+        else if ([type isEqualToString:@"UserStringData"])
+        {
+            [self addToStringCache:value isPath:NO];
         }
     }
     

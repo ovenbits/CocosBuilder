@@ -333,6 +333,12 @@ NSDictionary* renamedProperties = NULL;
         [SkeletonPropertySetter setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:controllerFile];
         [extraProps setObject:controllerFile forKey:name];
     }
+    else if ([type isEqualToString:@"UserStringData"])
+    {
+        NSString *userStringData = serializedValue;
+        if (!userStringData || ![userStringData isKindOfClass:[NSString class]]) userStringData = @"";
+        [extraProps setObject:userStringData forKey:name];
+    }
     else
     {
         NSLog(@"WARNING Unrecognized property type: %@", type);
