@@ -431,16 +431,15 @@
     
     if (isDirectory)
     {
-        return kCCBResTypeDirectory;
         // Hide resolution directories
-//        if ([[self resIndependentDirs] containsObject:[file lastPathComponent]])
-//        {
-//            return kCCBResTypeNone;
-//        }
-//        else
-//        {
-//            return kCCBResTypeDirectory;
-//        }
+        if ([[self resIndependentDirs] containsObject:[file lastPathComponent]])
+        {
+            return kCCBResTypeNone;
+        }
+        else
+        {
+            return kCCBResTypeDirectory;
+        }
     }
     //else if ([[file stringByDeletingPathExtension] hasSuffix:@"-hd"]
     //         || [[file stringByDeletingPathExtension] hasSuffix:@"@2x"])
@@ -962,6 +961,24 @@
     [CCBFileUtil setModificationDate:autoFileDate forFile:dstFile];
 }
 
+- (void) createCachedAtlasFromAuto:(NSString*)autoFile saveAs:(NSString*)dstFile
+{
+    // Create destination directory
+    [[NSFileManager defaultManager] createDirectoryAtPath:[dstFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:NULL error:NULL];
+    
+    NSString *atlasImageSrc = [[autoFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"png"];
+    NSString *atlasImageDst = [[dstFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"png"];
+    
+    if ([[NSFileManager defaultManager] isReadableFileAtPath:autoFile]) {
+        [[NSFileManager defaultManager] copyItemAtPath:autoFile toPath:dstFile error:nil];
+        [[NSFileManager defaultManager] copyItemAtPath:atlasImageSrc toPath:atlasImageDst error:nil];
+    }
+    
+    // Update modification time to match original file
+    NSDate* autoFileDate = [CCBFileUtil modificationDateForFile:autoFile];
+    [CCBFileUtil setModificationDate:autoFileDate forFile:dstFile];
+}
+
 - (NSString*) toAbsolutePath:(NSString*)path
 {
     if ([activeDirectories count] == 0) return NULL;
@@ -1041,7 +1058,11 @@
                     if ([autoFileDate isEqualToDate:cachedFileDate]) datesMatch = YES;
                 }
                 
-                if (!cachedFileExists || !datesMatch)
+                if ([[defaultFile pathExtension] isEqualToString:@"atlas"])
+                {
+                    [self createCachedAtlasFromAuto:autoFile saveAs:cachedFile];
+                }
+                else if (!cachedFileExists || !datesMatch)
                 {
                     // Not yet cached, create file
                     [self createCachedImageFromAuto:autoFile saveAs:cachedFile forResolution:ext];

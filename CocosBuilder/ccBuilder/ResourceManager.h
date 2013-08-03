@@ -165,6 +165,7 @@ enum
 - (NSArray*) resIndependentDirs;
 
 - (void) createCachedImageFromAuto:(NSString*)autoFile saveAs:(NSString*)dstFile forResolution:(NSString*)res;
+- (void) createCachedAtlasFromAuto:(NSString*)autoFile saveAs:(NSString*)dstFile;
 
 - (void) notifyResourceObserversResourceListUpdated;
 

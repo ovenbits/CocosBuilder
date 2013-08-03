@@ -244,6 +244,12 @@
             NSDate* dstDate = [CCBFileUtil modificationDateForFile:dstFile];
             if ([srcDate isEqualToDate:dstDate]) return YES;
             
+            if ([[srcAutoFile pathExtension] isEqualToString:@"atlas"])
+            {
+                [[ResourceManager sharedManager] createCachedAtlasFromAuto:srcAutoFile saveAs:dstFile];
+                return YES;
+            }
+            
             // Copy auto file and resize
             [[ResourceManager sharedManager] createCachedImageFromAuto:srcAutoFile saveAs:dstFile forResolution:resolution];
             return YES;
@@ -418,7 +424,7 @@
             else childPath = fileName;
             
             // Skip resource independent directories
-            if ([resIndependentDirs containsObject:fileName] && ![self shouldPublishDir:dir]) continue;
+            if (([resIndependentDirs containsObject:fileName] && ![self shouldPublishDir:dir]) || [fileName isEqualToString:@"resources-auto"]) continue;
             
             // Skip generated sprite sheets
             if (isGeneratedSpriteSheet) continue;
