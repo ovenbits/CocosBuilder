@@ -94,11 +94,6 @@
     }
 }
 
-+ (void)setAnimationFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)animationFile
-{
-    [node setValue:animationFile forKey:prop];
-}
-
 + (void)setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)controllerFile
 {
     [node setValue:controllerFile forKey:prop];

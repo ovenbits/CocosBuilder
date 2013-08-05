@@ -426,12 +426,6 @@
             if (!atlasFile) atlasFile = @"";
             serializedValue = atlasFile;
         }
-        else if ([type isEqualToString:@"AnimationFile"])
-        {
-            NSString *animationFile = [extraProps objectForKey:name];
-            if (!animationFile) animationFile = @"";
-            serializedValue = animationFile;
-        }
         else if ([type isEqualToString:@"ControllerFile"])
         {
             NSString *controllerFile = [extraProps objectForKey:name];

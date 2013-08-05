@@ -30,7 +30,6 @@
 
 + (void)setJSONFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)jsonFile;
 + (void)setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)atlasFile;
-+ (void)setAnimationFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)animationFile;
 + (void)setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)controllerFile;
 + (void)setSkeleton:(CCSkeletonAnimation *)node debugBones:(BOOL)debugBones;
 + (void)setSkeleton:(CCSkeletonAnimation *)node debugSlots:(BOOL)debugSlots;

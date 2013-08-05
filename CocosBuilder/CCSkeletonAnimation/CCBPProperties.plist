@@ -136,20 +136,6 @@
 			<true/>
 			<key>affectsProperties</key>
 			<array>
-				<string>animationFile</string>
-			</array>
-			<key>displayName</key>
-			<string>Animation file</string>
-			<key>type</key>
-			<string>AnimationFile</string>
-			<key>name</key>
-			<string>animationFile</string>
-		</dict>
-		<dict>
-			<key>animatable</key>
-			<true/>
-			<key>affectsProperties</key>
-			<array>
 				<string>controllerFile</string>
 			</array>
 			<key>displayName</key>
