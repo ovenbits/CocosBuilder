@@ -95,11 +95,6 @@
     }
 }
 
-+ (void)setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)controllerFile
-{
-    [node setValue:controllerFile forKey:prop];
-}
-
 + (void)setSkeleton:(CCSkeletonAnimation *)node debugBones:(BOOL)debugBones
 {
     node.debugBones = debugBones;

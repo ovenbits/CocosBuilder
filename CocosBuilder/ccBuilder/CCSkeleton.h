@@ -86,6 +86,5 @@ Draws a skeleton.
 @property (nonatomic) Bone* rootBone;
 @property (nonatomic, strong) NSString *jsonFile;
 @property (nonatomic, strong) NSString *atlasFile;
-@property (nonatomic, strong) NSString *controllerFile;
 
 @end

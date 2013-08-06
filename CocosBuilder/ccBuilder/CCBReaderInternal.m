@@ -323,7 +323,6 @@ NSDictionary* renamedProperties = NULL;
     {
         NSString *controllerFile = serializedValue;
         if (!controllerFile || ![controllerFile isKindOfClass:[NSString class]]) controllerFile = @"";
-        [SkeletonPropertySetter setControllerFileForNode:(CCSkeletonAnimation *)node andProperty:name withFile:controllerFile];
         [extraProps setObject:controllerFile forKey:name];
     }
     else if ([type isEqualToString:@"UserStringData"])

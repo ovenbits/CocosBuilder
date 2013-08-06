@@ -25,7 +25,7 @@
 #import "InspectorValue.h"
 
 @interface InspectorControllerFile : InspectorValue
-{
-    IBOutlet NSPopUpButton* popup;
-}
+
+@property (nonatomic,assign) NSString* controllerFile;
+
 @end

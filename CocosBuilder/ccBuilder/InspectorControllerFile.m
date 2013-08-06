@@ -35,43 +35,19 @@
 
 @implementation InspectorControllerFile
 
-- (void) willBeAdded
+- (void) setControllerFile:(NSString *)controllerFile
 {
-    // Setup menu
-    NSString* sf = [selection extraPropForKey:propertyName];
+    [[CocosBuilderAppDelegate appDelegate] saveUndoStateWillChangeProperty:@"controllerFile"];
     
-    [ResourceManagerUtil populateResourcePopup:popup resType:kCCBResTypeJS allowSpriteFrames:NO selectedFile:sf selectedSheet:NULL target:self];
+    if (!controllerFile) controllerFile = @"";
+    [selection setExtraProp:controllerFile forKey:@"controllerFile"];
 }
 
-- (void) selectedResource:(id)sender
+- (NSString*) controllerFile
 {
-    [[CocosBuilderAppDelegate appDelegate] saveUndoStateWillChangeProperty:propertyName];
-    
-    id item = [sender representedObject];
-    
-    NSString* ControllerFile = NULL;
-    
-    if ([item isKindOfClass:[RMResource class]])
-    {
-        RMResource* res = item;
-        
-        if (res.type == kCCBResTypeJS)
-        {
-            ControllerFile = [ResourceManagerUtil relativePathFromAbsolutePath:res.filePath];
-            [ResourceManagerUtil setTitle:ControllerFile forPopup:popup];
-        }
-    }
-    
-    if (ControllerFile)
-    {
-        [selection setExtraProp:ControllerFile forKey:propertyName];
-        [SkeletonPropertySetter setControllerFileForNode:(CCSkeletonAnimation *)selection andProperty:propertyName withFile:ControllerFile];
-    }
-    
-    [self updateAffectedProperties];
-    
-    // Reload the inspector
-    [[CocosBuilderAppDelegate appDelegate] performSelectorOnMainThread:@selector(updateInspectorFromSelection) withObject:NULL waitUntilDone:NO];
+    NSString* file = [selection extraPropForKey:@"controllerFile"];
+    if (!file) file = @"";
+    return file;
 }
 
 @end
