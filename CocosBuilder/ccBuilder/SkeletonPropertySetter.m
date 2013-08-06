@@ -51,7 +51,6 @@
 
 + (void)setAtlasFileForNode:(CCSkeletonAnimation *)node andProperty:(NSString *)prop withFile:(NSString *)atlasFile
 {
-    NSLog(@"ATLAS FILE: %@",atlasFile);
     NSString *atlasFileName = [[ResourceManager sharedManager] toAbsolutePath:atlasFile];
     bool newAtlasFile = ([node.atlasFile isEqualToString:atlasFileName]) ? false : true;
     node.atlasFile = atlasFileName;
@@ -71,6 +70,8 @@
     if (jsonFileName && atlasFileName) {
         
         if ([fileManager fileExistsAtPath:jsonFileName] && [fileManager fileExistsAtPath:atlasFileName]) {
+            
+            if (![[jsonFileName pathExtension] isEqualToString:@"json"] || ![[atlasFileName pathExtension] isEqualToString:@"atlas"]) return;
             
             NSString *skinName = [atlasFileName lastPathComponent];
             
