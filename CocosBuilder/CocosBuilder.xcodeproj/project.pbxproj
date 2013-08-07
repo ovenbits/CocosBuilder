@@ -138,8 +138,6 @@
 		81705FAB17A4618F0090694C /* CCSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 81705FA617A4618F0090694C /* CCSkeleton.m */; };
 		81705FAC17A4618F0090694C /* CCSkeletonAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 81705FA817A4618F0090694C /* CCSkeletonAnimation.m */; };
 		81705FAD17A4618F0090694C /* spine-cocos2d-iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 81705FAA17A4618F0090694C /* spine-cocos2d-iphone.m */; };
-		81D1B4F817A9F48A00E542DB /* InspectorAnimationFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1B4F617A9F48900E542DB /* InspectorAnimationFile.m */; };
-		81D1B4F917A9F48A00E542DB /* InspectorAnimationFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D1B4F717A9F48A00E542DB /* InspectorAnimationFile.xib */; };
 		81D1B4FD17A9F4AE00E542DB /* InspectorControllerFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1B4FB17A9F4AD00E542DB /* InspectorControllerFile.m */; };
 		81D1B4FE17A9F4AE00E542DB /* InspectorControllerFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D1B4FC17A9F4AE00E542DB /* InspectorControllerFile.xib */; };
 		835DB052171561B8003A2F7B /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 835DAFA7171561B7003A2F7B /* LICENSE.txt */; };
@@ -1109,9 +1107,6 @@
 		81705FA817A4618F0090694C /* CCSkeletonAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CCSkeletonAnimation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		81705FA917A4618F0090694C /* spine-cocos2d-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spine-cocos2d-iphone.h"; sourceTree = "<group>"; };
 		81705FAA17A4618F0090694C /* spine-cocos2d-iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "spine-cocos2d-iphone.m"; sourceTree = "<group>"; };
-		81D1B4F517A9F48900E542DB /* InspectorAnimationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorAnimationFile.h; sourceTree = "<group>"; };
-		81D1B4F617A9F48900E542DB /* InspectorAnimationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorAnimationFile.m; sourceTree = "<group>"; };
-		81D1B4F717A9F48A00E542DB /* InspectorAnimationFile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorAnimationFile.xib; sourceTree = "<group>"; };
 		81D1B4FA17A9F4AD00E542DB /* InspectorControllerFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorControllerFile.h; sourceTree = "<group>"; };
 		81D1B4FB17A9F4AD00E542DB /* InspectorControllerFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorControllerFile.m; sourceTree = "<group>"; };
 		81D1B4FC17A9F4AE00E542DB /* InspectorControllerFile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorControllerFile.xib; sourceTree = "<group>"; };
@@ -3922,9 +3917,6 @@
 			children = (
 				E3B7AEED14E34A4D00DFD402 /* InspectorValue.h */,
 				E3B7AEEE14E34A4D00DFD402 /* InspectorValue.m */,
-				81D1B4F517A9F48900E542DB /* InspectorAnimationFile.h */,
-				81D1B4F617A9F48900E542DB /* InspectorAnimationFile.m */,
-				81D1B4F717A9F48A00E542DB /* InspectorAnimationFile.xib */,
 				812B47C817A4AEA6000DD9E8 /* InspectorAtlasFile.h */,
 				812B47C917A4AEA7000DD9E8 /* InspectorAtlasFile.m */,
 				812B47CA17A4AEA8000DD9E8 /* InspectorAtlasFile.xib */,
@@ -4972,7 +4964,6 @@
 				812B47CC17A4AEA9000DD9E8 /* InspectorAtlasFile.xib in Resources */,
 				812B47D417A4C44A000DD9E8 /* InspectorDebugSkeleton.xib in Resources */,
 				812B47D917A4C893000DD9E8 /* InspectorSkeletonAnimations.xib in Resources */,
-				81D1B4F917A9F48A00E542DB /* InspectorAnimationFile.xib in Resources */,
 				81D1B4FE17A9F4AE00E542DB /* InspectorControllerFile.xib in Resources */,
 				816B5D1B17ABFB0000E1A959 /* InspectorUserStringData.xib in Resources */,
 			);
@@ -5513,7 +5504,6 @@
 				812B47CF17A4B5CA000DD9E8 /* SkeletonPropertySetter.m in Sources */,
 				812B47D317A4C44A000DD9E8 /* InspectorDebugSkeleton.m in Sources */,
 				812B47D817A4C893000DD9E8 /* InspectorSkeletonAnimations.m in Sources */,
-				81D1B4F817A9F48A00E542DB /* InspectorAnimationFile.m in Sources */,
 				81D1B4FD17A9F4AE00E542DB /* InspectorControllerFile.m in Sources */,
 				816B5D1A17ABFB0000E1A959 /* InspectorUserStringData.m in Sources */,
 			);

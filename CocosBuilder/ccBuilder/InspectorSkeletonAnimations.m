@@ -53,16 +53,17 @@
             [_animations addObject:dictionary];
         }
         
-        NSDictionary *dictionary = @{@"animation" : @"pause"};
+        NSDictionary *dictionary = @{@"animation" : @"stop"};
         [_animations addObject:dictionary];
     }
 
     return _animations;
 }
 
-- (void)updateAnimation:(id)selectedAnimation
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
 {
-    NSString *animationName = [selectedAnimation valueForKey:@"animation"];
+    NSDictionary *animation = [_animations objectAtIndex:row];
+    NSString *animationName = [animation valueForKey:@"animation"];
     
     CCSkeletonAnimation *skeleton = (CCSkeletonAnimation *)selection;
     
@@ -71,6 +72,7 @@
     } else
         [skeleton setAnimation:animationName loop:YES];
     
+    return YES;
 }
 
 @end
