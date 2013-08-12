@@ -26,6 +26,8 @@
 #import "CocosBuilderAppDelegate.h"
 #import "SkeletonPropertySetter.h"
 
+#define CLEAR_ANIMATION @"DISABLE ANIMATION"
+
 @implementation InspectorSkeletonAnimations
 
 @synthesize animations=_animations;
@@ -45,6 +47,9 @@
     
     if (skeleton.skeleton)
     {
+        NSDictionary *dictionary = @{@"animation" : CLEAR_ANIMATION};
+        [_animations addObject:dictionary];
+        
         Animation **animations = skeleton.skeleton->data->animations;
     
         for (int i = 0; i < skeleton.skeleton->data->animationCount; i++) {
@@ -52,9 +57,6 @@
             NSDictionary *dictionary = @{@"animation" : animationName};
             [_animations addObject:dictionary];
         }
-        
-        NSDictionary *dictionary = @{@"animation" : @"stop"};
-        [_animations addObject:dictionary];
     }
 
     return _animations;
@@ -67,10 +69,14 @@
     
     CCSkeletonAnimation *skeleton = (CCSkeletonAnimation *)selection;
     
-    if ([animationName isEqualToString:@"pause"]) {
+    if ([animationName isEqualToString:CLEAR_ANIMATION]) {
         [skeleton clearAnimation];
-    } else
+        [skeleton setToSetupPose];
+    } else {
+        [skeleton clearAnimation];
+        [skeleton setToSetupPose];
         [skeleton setAnimation:animationName loop:YES];
+    }
     
     return YES;
 }

@@ -262,6 +262,8 @@ SkeletonData* SkeletonJson_readSkeletonData (SkeletonJson* self, const char* jso
 	skeletonData = SkeletonData_create();
 
 	bones = Json_getItem(root, "bones");
+    if (!bones)
+        return 0;
 	boneCount = Json_getSize(bones);
 	skeletonData->bones = MALLOC(BoneData*, boneCount);
 	for (i = 0; i < boneCount; ++i) {
