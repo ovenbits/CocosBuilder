@@ -59,6 +59,8 @@
     [self unscheduleUpdate];
 	_ownsSkeletonData = ownsSkeletonData;
 
+    _anchorPoint =  ccp(0.5f, 0.5f);
+    
 	_skeleton = Skeleton_create(skeletonData);
 	_rootBone = _skeleton->bones[0];
 
@@ -221,6 +223,7 @@
 }
 
 - (CGRect) boundingBox {
+    [self updateWorldTransform];
 	float minX = FLT_MAX, minY = FLT_MAX, maxX = FLT_MIN, maxY = FLT_MIN;
 	float scaleX = self.scaleX;
 	float scaleY = self.scaleY;
@@ -251,7 +254,19 @@
 	minY = self.position.y + minY;
 	maxX = self.position.x + maxX;
 	maxY = self.position.y + maxY;
-	return CGRectMake(minX, minY, maxX - minX, maxY - minY);
+    
+    float width = maxX - minX;
+    float height = maxY - minY;
+    
+    minX -= _anchorPoint.x*width;
+    minY -= _anchorPoint.y*height;
+    
+    if (_scaleX < 0)
+        minX += width;
+    if (_scaleY < 0)
+        minY += height;
+
+	return CGRectMake(minX, minY, width, height);
 }
 
 // --- Convenience methods for Skeleton_* functions.

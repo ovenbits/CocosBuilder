@@ -54,6 +54,8 @@ Draws a skeleton.
 
 - (CCTextureAtlas*) getTextureAtlas:(RegionAttachment*)regionAttachment;
 
+- (CGRect) boundingBox;
+
 // --- Convenience methods for common Skeleton_* functions.
 - (void) updateWorldTransform;
 

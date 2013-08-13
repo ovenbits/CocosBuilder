@@ -19,19 +19,6 @@
 	</dict>
 	<key>editorClassName</key>
 	<string>CCSkeletonAnimation</string>
-	<key>propertiesOverridden</key>
-	<array>
-		<dict>
-			<key>readOnly</key>
-			<true/>
-			<key>type</key>
-			<string>Size</string>
-			<key>name</key>
-			<string>contentSize</string>
-			<key>displayName</key>
-			<string>Content size</string>
-		</dict>
-	</array>
 	<key>properties</key>
 	<array>
 		<dict>

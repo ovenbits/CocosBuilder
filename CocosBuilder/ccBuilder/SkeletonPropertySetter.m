@@ -23,6 +23,7 @@
  */
 
 #import "SkeletonPropertySetter.h"
+#import "PositionPropertySetter.h"
 #import "CocosBuilderAppDelegate.h"
 #import "CCBGlobals.h"
 #import "CCBWriterInternal.h"
@@ -88,6 +89,10 @@
                 [node setSkin:[skinName stringByDeletingPathExtension]];
                 [node initialize];
                 [node setToSetupPose];
+                
+                CGRect boundingBox = [node boundingBox];
+                CGSize contentSize = CGSizeMake(abs(boundingBox.size.width/node.scaleX), abs(boundingBox.size.height/node.scaleX));
+                [PositionPropertySetter setSize:contentSize forNode:node prop:@"contentSize"];
                 
                 node.timeScale = 1.0f;
             }
