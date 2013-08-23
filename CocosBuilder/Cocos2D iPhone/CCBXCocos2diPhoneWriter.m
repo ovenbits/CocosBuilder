@@ -65,10 +65,10 @@
     [propTypes addObject:@"BlockCCControl"];
     [propTypes addObject:@"FloatScale"];
     [propTypes addObject:@"FloatXY"];
+    [propTypes addObject:@"UserStringData"];    
     [propTypes addObject:@"JSONFile"];
     [propTypes addObject:@"AtlasFile"];
     [propTypes addObject:@"ControllerFile"];
-    [propTypes addObject:@"UserStringData"];
 }
 
 - (id) init
