@@ -158,7 +158,7 @@
 	quad.bl.vertices.z = 0;
 	quad.br.vertices.z = 0;
 	for (int i = 0, n = _skeleton->slotCount; i < n; i++) {
-		Slot* slot = _skeleton->slots[i];
+		Slot* slot = _skeleton->drawOrder[i];   // OVENBITS (change _skeleton->slots[i] to _skeleton->drawOrder[i])
 		if (!slot->attachment || slot->attachment->type != ATTACHMENT_REGION) continue;
 		RegionAttachment* attachment = (RegionAttachment*)slot->attachment;
 		CCTextureAtlas* regionTextureAtlas = [self getTextureAtlas:attachment];

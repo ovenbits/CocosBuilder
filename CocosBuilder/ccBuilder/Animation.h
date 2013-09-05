@@ -116,6 +116,22 @@ void ColorTimeline_setFrame (ColorTimeline* self, int frameIndex, float time, fl
 
 /**/
 
+// BEGIN: OVENBITS
+
+typedef struct {
+    Timeline super;
+    int const framesLength;        
+    float* const frames;
+    int** drawOrders;
+} DrawOrderTimeline;
+
+DrawOrderTimeline *DrawOrderTimeline_create (int frameCount);
+void DrawOrderTimeline_setFrame (DrawOrderTimeline* self, int frameIndex, float time, int* drawOrder, int drawOrderCount);
+
+// END: OVENBITS
+    
+/**/
+
 typedef struct {
 	Timeline super;
 	int const framesLength;

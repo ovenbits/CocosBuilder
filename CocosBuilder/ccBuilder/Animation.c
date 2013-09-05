@@ -47,6 +47,14 @@ void Animation_dispose (Animation* self) {
 void Animation_apply (const Animation* self, Skeleton* skeleton, float time, int/*bool*/loop) {
 	int i, n = self->timelineCount;
 
+    // BEGIN: OVENBITS
+    // set default draw order
+    Slot** drawOrder = skeleton->drawOrder;
+    Slot** slots = skeleton->slots;
+    for (int i = 0, n = skeleton->slotCount; i < n; i++)
+        drawOrder[i] = slots[i];
+    // END: OVENBITS
+    
 #ifdef __STDC_VERSION__
 	if (loop && self->duration) time = fmodf(time, self->duration);
 #else
@@ -440,6 +448,73 @@ void ColorTimeline_setFrame (ColorTimeline* self, int frameIndex, float time, fl
 	self->frames[frameIndex + 3] = b;
 	self->frames[frameIndex + 4] = a;
 }
+
+/**/
+
+// BEGIN: OVENBITS
+
+void _DrawOrderTimeline_apply (const Timeline* timeline, Skeleton* skeleton, float time, float alpha) {
+    
+    int frameIndex;
+    int* drawOrderToSetupIndex;
+    DrawOrderTimeline *self = (DrawOrderTimeline*)timeline;
+    
+    if (time < self->frames[0]) return;
+    
+    if (time >= self->frames[self->framesLength - 1])
+        frameIndex = self->framesLength - 1;
+    else
+        frameIndex = binarySearch(self->frames, self->framesLength, time, 1) - 1;
+    
+    Slot** drawOrder = skeleton->drawOrder;
+    Slot** slots = skeleton->slots;
+    
+    drawOrderToSetupIndex = self->drawOrders[frameIndex];
+    
+    for (int i = 0, n = skeleton->slotCount; i < n; i++) {
+        drawOrder[i] = slots[drawOrderToSetupIndex[i]];
+    }
+}
+
+void _DrawOrderTimeline_dispose (Timeline* timeline) {
+
+	DrawOrderTimeline* self;
+	int i;
+    
+	_Timeline_deinit(timeline);
+	self = (DrawOrderTimeline*)timeline;
+    
+	for (i = 0; i < self->framesLength; ++i)
+		FREE(self->drawOrders[i]);
+	FREE(self->drawOrders);
+	FREE(self->frames);
+	FREE(self);
+}
+
+DrawOrderTimeline* DrawOrderTimeline_create (int frameCount) {
+	DrawOrderTimeline* self = NEW(DrawOrderTimeline);
+	_Timeline_init(SUPER(self), _DrawOrderTimeline_dispose, _DrawOrderTimeline_apply);
+
+	CONST_CAST(int**, self->drawOrders) = CALLOC(int*, frameCount);
+	CONST_CAST(int, self->framesLength) = frameCount;
+	CONST_CAST(float*, self->frames) = CALLOC(float, frameCount);
+    
+	return self;
+}
+
+void DrawOrderTimeline_setFrame (DrawOrderTimeline* self, int frameIndex, float time, int* drawOrder, int drawOrderCount) {
+    self->frames[frameIndex] = time;
+	FREE(self->drawOrders[frameIndex]);
+	if (drawOrder) {
+        self->drawOrders[frameIndex] = MALLOC(int, drawOrderCount);
+		self->drawOrders[frameIndex] = drawOrder;
+    }
+	else {
+		self->drawOrders[frameIndex] = 0;
+    }
+}
+
+// END: OVENBITS
 
 /**/
 
