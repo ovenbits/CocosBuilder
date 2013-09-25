@@ -38,6 +38,7 @@ struct BoneData {
 	float x, y;
 	float rotation;
 	float scaleX, scaleY;
+    int inheritScale, inheritRotation;
 };
 
 BoneData* BoneData_create (const char* name, BoneData* parent);
