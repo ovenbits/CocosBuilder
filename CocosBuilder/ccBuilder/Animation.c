@@ -456,6 +456,8 @@ void ColorTimeline_setFrame (ColorTimeline* self, int frameIndex, float time, fl
 void _DrawOrderTimeline_apply (const Timeline* timeline, Skeleton* skeleton, float time, float alpha) {
     
     int frameIndex;
+    int i;
+    int n;
     int* drawOrderToSetupIndex;
     DrawOrderTimeline *self = (DrawOrderTimeline*)timeline;
     
@@ -471,9 +473,12 @@ void _DrawOrderTimeline_apply (const Timeline* timeline, Skeleton* skeleton, flo
     
     drawOrderToSetupIndex = self->drawOrders[frameIndex];
     
-    for (int i = 0, n = skeleton->slotCount; i < n; i++) {
-        drawOrder[i] = slots[drawOrderToSetupIndex[i]];
-    }
+    if (drawOrderToSetupIndex)
+        for (i = 0, n = skeleton->slotCount; i < n; i++)
+            drawOrder[i] = slots[drawOrderToSetupIndex[i]];
+    else
+        for (i = 0, n = skeleton->slotCount; i < n; i++)
+            drawOrder[i] = slots[i];
 }
 
 void _DrawOrderTimeline_dispose (Timeline* timeline) {

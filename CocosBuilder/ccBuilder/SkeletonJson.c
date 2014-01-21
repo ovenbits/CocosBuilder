@@ -241,60 +241,62 @@ static Animation* _SkeletonJson_readAnimation (SkeletonJson* self, Json* root, S
         for (i = 0; i < drawOrderCount; ++i) {
             
             Json* drawOrderMap = Json_getItemAt(drawOrdersMap, i);
-            
-            int* drawOrder = MALLOC(int, slotCount);
-            //int drawOrder[slotCount];
-            
-            for (ii = slotCount-1; ii >= 0; ii--)
-                drawOrder[ii] = -1;
-            
             Json* offsetsMap = Json_getItem(drawOrderMap, "offsets");
-            int offsetsCount = Json_getSize(offsetsMap);
             
-            int unchanged[slotCount - offsetsCount];
-            int originalIndex = 0, unchangedIndex = 0;
+            int* drawOrder = 0;
             
-            int changed[offsetsCount];
-            
-            for (iii = 0; iii < offsetsCount; ++iii) {
-                Json* offsetMap = Json_getItemAt(offsetsMap, iii);
-                const char* slotName = Json_getString(offsetMap, "slot", "");
-                int slotIndex = SkeletonData_findSlotIndex(skeletonData, slotName);
-                if (slotIndex == -1) {
-                    Animation_dispose(animation);
-                    _SkeletonJson_setError(self, 0, "Slot not found: ", slotName);
-                    return 0;
+            if (offsetsMap) {
+                int offsetsCount = Json_getSize(offsetsMap);
+                
+                drawOrder = MALLOC(int, slotCount);
+                for (ii = slotCount-1; ii >= 0; ii--)
+                    drawOrder[ii] = -1;
+                
+                int unchanged[slotCount - offsetsCount];
+                int originalIndex = 0, unchangedIndex = 0;
+                
+                int changed[offsetsCount];
+                
+                for (iii = 0; iii < offsetsCount; ++iii) {
+                    Json* offsetMap = Json_getItemAt(offsetsMap, iii);
+                    const char* slotName = Json_getString(offsetMap, "slot", "");
+                    int slotIndex = SkeletonData_findSlotIndex(skeletonData, slotName);
+                    if (slotIndex == -1) {
+                        Animation_dispose(animation);
+                        _SkeletonJson_setError(self, 0, "Slot not found: ", slotName);
+                        return 0;
+                    }
+                    
+                    while (originalIndex != slotIndex)
+                        unchanged[unchangedIndex++] = originalIndex++;
+                    
+                    changed[iii] = slotIndex;
+                    
+                    drawOrder[originalIndex + Json_getInt(offsetMap, "offset", 0)] = slotIndex;
+                    originalIndex++;
+                    
                 }
                 
-                while (originalIndex != slotIndex)
-                    unchanged[unchangedIndex++] = originalIndex++;
-                
-                changed[iii] = slotIndex;
-                
-                drawOrder[(originalIndex + Json_getInt(offsetMap, "offset", 0) - 1)] = slotIndex;
-                originalIndex++;
-                
-            }
-            
-            originalIndex = 0;
-            unchangedIndex = 0;
-            while (originalIndex < slotCount) {
-                int flag = 0;
-                for (iii = 0; iii < offsetsCount; iii++)
-                {
-                    if (originalIndex == changed[iii])
-                        flag = 1;
+                originalIndex = 0;
+                unchangedIndex = 0;
+                while (originalIndex < slotCount) {
+                    int flag = 0;
+                    for (iii = 0; iii < offsetsCount; iii++)
+                    {
+                        if (originalIndex == changed[iii])
+                            flag = 1;
+                    }
+                    if (flag != 1) {
+                        unchanged[unchangedIndex++] = originalIndex;
+                    }
+                    originalIndex++;
                 }
-                if (flag != 1) {
-                    unchanged[unchangedIndex++] = originalIndex;
-                }
-                originalIndex++;
-            }
-            
-            for (iii = slotCount - 1; iii >= 0; iii--) {
-                if (drawOrder[iii] == -1)
-                {
-                    drawOrder[iii] = unchanged[--unchangedIndex];
+                
+                for (iii = slotCount - 1; iii >= 0; iii--) {
+                    if (drawOrder[iii] == -1)
+                    {
+                        drawOrder[iii] = unchanged[--unchangedIndex];
+                    }
                 }
             }
             
