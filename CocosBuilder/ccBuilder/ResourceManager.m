@@ -1021,8 +1021,11 @@
             NSString* defaultFileName = [defaultFile lastPathComponent];
             NSString* defaultDirName = [defaultFile stringByDeletingLastPathComponent];
             
+            NSMutableArray *newRes = [NSMutableArray arrayWithArray:res.exts];
+            [newRes addObject:@"xlarge"];
+            
             // Select by resolution
-            for (NSString* ext in res.exts)
+            for (NSString* ext in newRes)
             {
                 if ([ext isEqualToString:@""]) continue;
                 ext = [@"resources-" stringByAppendingString:ext];

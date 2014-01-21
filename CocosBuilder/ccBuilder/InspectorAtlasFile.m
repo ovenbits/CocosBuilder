@@ -64,6 +64,7 @@
     
     if (atlasFile)
     {
+        atlasFile = [atlasFile lastPathComponent];
         [selection setExtraProp:atlasFile forKey:propertyName];
         [SkeletonPropertySetter setAtlasFileForNode:(CCSkeletonAnimation *)selection andProperty:propertyName withFile:atlasFile];
     }

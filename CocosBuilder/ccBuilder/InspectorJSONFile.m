@@ -64,6 +64,7 @@
     
     if (JSONFile)
     {
+        JSONFile = [JSONFile lastPathComponent];
         [selection setExtraProp:JSONFile forKey:propertyName];
         [SkeletonPropertySetter setJSONFileForNode:(CCSkeletonAnimation *)selection andProperty:propertyName withFile:JSONFile];
     }
