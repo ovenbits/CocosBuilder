@@ -27,7 +27,7 @@ cp -RL "Examples/CocosBuilderExample/libs/CCBReader" "build/CocosBuilder-$CCB_VE
 
 cd build/
 
-COCOS_BUILDER="CocosBuilder-Ovenbits.app"
+COCOS_BUILDER="CCB-OvenBits-Spine.app"
 mv CocosBuilder.app $COCOS_BUILDER
 
 zip -r "CocosBuilder-$CCB_VERSION.zip" $COCOS_BUILDER

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}-OB-Spine</string>
+	<string>CCB-OvenBits-Spine</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -52,7 +52,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}-OB-Spine</string>
+	<string>CCB-OvenBits-Spine</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
