@@ -845,9 +845,6 @@
     // Publish resources and ccb-files
     for (NSString* dir in projectSettings.absoluteResourcePaths)
     {
-        // FIXME - Don't hard code
-        if ([dir rangeOfString:@"spine"].location != NSNotFound) continue;
-
         if (![self publishDirectory:dir subPath:NULL]) return NO;
     }
     

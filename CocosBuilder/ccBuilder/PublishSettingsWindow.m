@@ -112,4 +112,45 @@
     }];
 }
 
+- (IBAction)addReferenceDirectory:(id)sender
+{
+    NSLog(@"adding reference directory");
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    [openDlg setCanChooseFiles:NO];
+    [openDlg setCanChooseDirectories:YES];
+    
+    [openDlg beginSheetModalForWindow:self.window completionHandler:^(NSInteger result){
+        if (result == NSOKButton)
+        {
+            [[[CCDirector sharedDirector] view] lockOpenGLContext];
+            
+            NSArray* files = [openDlg URLs];
+            
+            for (int i = 0; i < [files count]; i++)
+            {
+                NSString* dirName = [[files objectAtIndex:i] path];
+                NSString* projectDir = [projectSettings.projectPath stringByDeletingLastPathComponent];
+                NSString* relDirName = [dirName relativePathFromBaseDirPath:projectDir];
+                
+                // Check for duplicate
+                BOOL isDuplicate = NO;
+                for (NSDictionary* row in projectSettings.additionalReferencePaths)
+                {
+                    NSString* path = [row objectForKey:@"path"];
+                    if ([path isEqualToString:relDirName]) isDuplicate = YES;
+                }
+                
+                if (!isDuplicate)
+                {
+                    [additionalReferenceFoldersController addObject:[NSMutableDictionary dictionaryWithObject:relDirName forKey:@"path"]];
+                }
+            }
+            
+            NSLog(@"additional reference dirs: %@",projectSettings.additionalReferencePaths);
+            
+            [[[CCDirector sharedDirector] view] unlockOpenGLContext];
+        }
+    }];
+}
+
 @end

@@ -1241,7 +1241,15 @@ static BOOL hideAllToNextSeparator;
     {
         [resManager addDirectory:dir];
     }
-    [[ResourceManager sharedManager] setActiveDirectories:[projectSettings absoluteResourcePaths]];
+    for (NSString* dir in [projectSettings absoluteReferencePaths])
+    {
+        [resManager addDirectory:dir];
+    }
+    
+    NSMutableArray *directories = [[NSMutableArray alloc] initWithArray:[projectSettings absoluteResourcePaths] copyItems:YES];
+    [directories addObjectsFromArray:[[projectSettings absoluteReferencePaths] copy]];
+    
+    [[ResourceManager sharedManager] setActiveDirectories:directories];
 }
 
 - (void) closeProject

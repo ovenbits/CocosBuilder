@@ -58,6 +58,7 @@
     NSString* projectPath;
     NSMutableArray* resourcePaths;
     NSMutableArray* additionalPublishPaths;
+    NSMutableArray* additionalReferencePaths;
     NSMutableDictionary* generatedSpriteSheets;
     NSMutableDictionary* breakpoints;
     
@@ -108,6 +109,7 @@
 @property (nonatomic, readonly) NSString* projectPathHashed;
 @property (nonatomic, retain) NSMutableArray* resourcePaths;
 @property (nonatomic, retain) NSMutableArray* additionalPublishPaths;
+@property (nonatomic, retain) NSMutableArray* additionalReferencePaths;
 
 @property (nonatomic,assign) BOOL publishEnablediPhone;
 @property (nonatomic,assign) BOOL publishEnabledAndroid;
@@ -157,6 +159,8 @@
 @property (nonatomic,readonly) NSDictionary* breakpoints;
 @property (nonatomic, copy) NSString* versionStr;
 @property (nonatomic, assign) BOOL needRepublish;
+
+- (NSArray *)absoluteReferencePaths;
 
 - (id) initWithSerialization:(id)dict;
 - (BOOL) store;

@@ -32,6 +32,7 @@
     ProjectSettings* projectSettings;
     IBOutlet NSArrayController* resDirArrayController;
     IBOutlet NSArrayController* additionalPublishDirArrayController;
+    IBOutlet NSArrayController* additionalReferenceFoldersController;
 }
 
 @property (nonatomic,retain) ProjectSettings* projectSettings;
