@@ -160,6 +160,7 @@
     [resourcePaths addObject:[NSMutableDictionary dictionaryWithObject:@"Resources" forKey:@"path"]];
     additionalPublishPaths = [[NSMutableArray alloc] init];
     additionalReferencePaths = [[NSMutableArray alloc] init];
+    
     self.publishDirectory = @"Published-iOS";
     self.publishDirectoryAndroid = @"Published-Android";
     self.publishDirectoryHTML5 = @"Published-HTML5";
@@ -221,7 +222,7 @@
     
     // Read settings
     self.resourcePaths = [dict objectForKey:@"resourcePaths"];
-    
+
     if ([dict objectForKey:@"additionalPublishPaths"])
         self.additionalPublishPaths = [dict objectForKey:@"additionalPublishPaths"];
     else
@@ -231,7 +232,7 @@
         self.additionalReferencePaths = [dict objectForKey:@"additionalReferencePaths"];
     else
         self.additionalReferencePaths = [[NSMutableArray alloc] init];
-    
+
     self.publishDirectory = [dict objectForKey:@"publishDirectory"];
     self.publishDirectoryAndroid = [dict objectForKey:@"publishDirectoryAndroid"];
     self.publishDirectoryHTML5 = [dict objectForKey:@"publishDirectoryHTML5"];
@@ -340,7 +341,6 @@
     [dict setObject:resourcePaths forKey:@"resourcePaths"];
     
     [dict setObject:additionalPublishPaths forKey:@"additionalPublishPaths"];
-
     [dict setObject:additionalReferencePaths forKey:@"additionalReferencePaths"];
     
     [dict setObject:publishDirectory forKey:@"publishDirectory"];
